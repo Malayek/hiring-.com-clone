@@ -1,0 +1,3063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HireFast Cafe – Hire & Get Hired Fast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary: #5126ff;
+      --primary-soft: #ede9ff;
+      --accent: #ff6b4a;
+      --bg: #050816;
+      --bg-soft: #0b1022;
+      --card: #10172f;
+      --border: #1f2937;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.45);
+      --shadow-subtle: 0 10px 30px rgba(15,23,42,0.6);
+      --glass: rgba(15,23,42,0.82);
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d223b 0, #050816 45%, #020617 100%);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+    }
+
+    input, select, textarea {
+      font-family: inherit;
+      background: #020617;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      outline: none;
+      width: 100%;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(81, 38, 255, 0.4);
+      transform: translateY(-1px);
+    }
+
+    textarea {
+      border-radius: 14px;
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    ::placeholder {
+      color: #6b7280;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.92), rgba(15,23,42,0.9));
+      color: #e5e7eb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(148,163,184,0.12);
+      color: #e5e7eb;
+      border: 1px solid rgba(148,163,184,0.35);
+    }
+
+    .pill-button {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.95));
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .pill-button:hover {
+      background: radial-gradient(circle at top, rgba(30,64,175,0.95), rgba(15,23,42,0.98));
+      border-color: rgba(129,140,248,0.7);
+      box-shadow: var(--shadow-subtle);
+      transform: translateY(-1px);
+    }
+
+    .pill-button.primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-color: rgba(129,140,248,0.8);
+      color: #f9fafb;
+      box-shadow: 0 18px 35px rgba(79,70,229,0.45);
+    }
+
+    .pill-button.primary:hover {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      transform: translateY(-2px) translateZ(0);
+      box-shadow: 0 24px 50px rgba(79,70,229,0.65);
+    }
+
+    .pill-button.ghost {
+      background: transparent;
+      border-color: rgba(148,163,184,0.6);
+    }
+
+    .pill-button.small {
+      padding: 6px 12px;
+      font-size: 0.78rem;
+    }
+
+    .pill-button .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.36);
+    }
+
+    .pill-button .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 10px;
+    }
+
+    .page {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 18px 16px 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.94), rgba(15,23,42,0.98));
+      border: 1px solid rgba(148,163,184,0.55);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+      position: sticky;
+      top: 12px;
+      z-index: 40;
+      backdrop-filter: blur(22px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 14px;
+      background: conic-gradient(from 210deg, #4f46e5, #ec4899, #22c55e, #f97316, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      box-shadow: 0 0 25px rgba(129,140,248,0.7);
+    }
+
+    .logo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 0, #0f172a, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5e7eb;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .logo-text span:first-child {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo-text span:last-child {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      background: rgba(15,23,42,0.88);
+      border-radius: 999px;
+      padding: 3px;
+      border: 1px solid rgba(148,163,184,0.6);
+    }
+
+    .nav-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .nav-pill span {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .nav-pill.active {
+      background: radial-gradient(circle at top, #4f46e5, #7c3aed);
+      box-shadow: 0 16px 30px rgba(79,70,229,0.7);
+      color: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .nav-pill:hover:not(.active) {
+      background: rgba(30,64,175,0.65);
+      box-shadow: 0 8px 20px rgba(30,64,175,0.7);
+      transform: translateY(-1px);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-chip {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15,23,42,0.92);
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(148,163,184,0.6);
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .user-chip:hover {
+      background: rgba(30,64,175,0.9);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .user-avatar {
+      width: 23px;
+      height: 23px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #4f46e5, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 2px solid #020617;
+      color: #f9fafb;
+    }
+
+    .user-name {
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .user-role {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .user-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
+    }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 22px;
+      margin-top: 8px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 920px) {
+      header {
+        flex-wrap: wrap;
+        padding: 10px 12px;
+      }
+      .nav-right {
+        width: 100%;
+        justify-content: flex-end;
+      }
+      .main-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        top: 0;
+        border-radius: 0 0 24px 24px;
+      }
+      .page {
+        padding: 72px 10px 24px;
+      }
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, rgba(15,23,42,0.94), #020617 60%);
+      border-radius: 32px;
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(148,163,184,0.6);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .hero-left-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .live-hiring {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px 5px 5px;
+      border-radius: 999px;
+      border: 1px solid rgba(34,197,94,0.66);
+      background: rgba(6,95,70,0.2);
+      color: #bbf7d0;
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34,197,94,0.4);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.55);
+      font-size: 0.75rem;
+      color: #e5e7eb;
+    }
+
+    .hero-title {
+      font-size: clamp(1.7rem, 3.4vw, 2.1rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+      margin-top: 4px;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(135deg, #a855f7, #f97316);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 12px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .hero-secondary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-secondary img,
+    .hero-secondary .avatars {
+      display: inline-flex;
+    }
+
+    .avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-bubble {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 2px solid #020617;
+      background: linear-gradient(135deg, #4f46e5, #ec4899);
+      margin-left: -7px;
+    }
+
+    .avatar-bubble:first-child {
+      margin-left: 0;
+    }
+
+    .hero-bottom-strip {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding-top: 10px;
+      border-top: 1px dashed rgba(148,163,184,0.5);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .hero-badges span {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.9);
+      font-size: 0.74rem;
+    }
+
+    .hero-glow-orb {
+      position: absolute;
+      right: -50px;
+      top: -50px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at 30% 0, rgba(248,250,252,0.3), rgba(79,70,229,0.1), transparent 70%);
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .hero-glow-orb::after {
+      content: "";
+      position: absolute;
+      inset: 24px 24px 40px 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(129,140,248,0.4);
+      background: radial-gradient(circle at 40% 0, rgba(30,64,175,0.8), rgba(15,23,42,0.97));
+      box-shadow: 0 30px 60px rgba(15,23,42,0.9);
+    }
+
+    .search-card {
+      margin-top: 14px;
+      padding: 10px 12px 12px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: 0 15px 35px rgba(15,23,42,0.95);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .search-top-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+    }
+
+    .search-input-wrap input {
+      padding-left: 32px;
+      border-radius: 999px;
+      background: #020617;
+    }
+
+    .search-input-wrap .icon {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .search-filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.75rem;
+      align-items: center;
+    }
+
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.96);
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .filter-chip.active {
+      background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+      border-color: rgba(129,140,248,0.85);
+      box-shadow: 0 14px 35px rgba(37,99,235,0.9);
+      transform: translateY(-1px);
+    }
+
+    .filter-chip:hover:not(.active) {
+      background: rgba(30,64,175,0.85);
+      box-shadow: 0 10px 25px rgba(30,64,175,0.9);
+      transform: translateY(-1px);
+    }
+
+    .filter-chip .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .search-meta {
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .search-meta span strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .search-meta span.highlight {
+      color: #a5b4fc;
+    }
+
+    .jobs-section {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #9ca3af;
+    }
+
+    .section-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .section-header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 860px) {
+      .jobs-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .jobs-list-card {
+      background: rgba(15,23,42,0.96);
+      border-radius: 18px;
+      padding: 10px 10px 10px;
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 380px;
+      overflow: hidden;
+    }
+
+    .jobs-list-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow-y: auto;
+      padding-right: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(148,163,184,0.8) rgba(15,23,42,1);
+    }
+
+    .jobs-list-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .jobs-list-scroll::-webkit-scrollbar-track {
+      background: rgba(15,23,42,1);
+    }
+
+    .jobs-list-scroll::-webkit-scrollbar-thumb {
+      background: rgba(148,163,184,0.75);
+      border-radius: 999px;
+    }
+
+    .job-card {
+      border-radius: 14px;
+      padding: 9px 10px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: radial-gradient(circle at 0 0, rgba(15,23,42,0.98), rgba(15,23,42,0.96));
+      display: flex;
+      gap: 10px;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), background var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .job-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid transparent;
+      background: linear-gradient(120deg, rgba(79,70,229,0), rgba(236,72,153,0.25), rgba(56,189,248,0)) border-box;
+      mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+      pointer-events: none;
+    }
+
+    .job-card.selected,
+    .job-card:hover {
+      border-color: rgba(129,140,248,0.85);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+      transform: translateY(-1px);
+      background: radial-gradient(circle at 0 0, rgba(15,23,42,1), rgba(15,23,42,0.98));
+    }
+
+    .job-card.selected::after,
+    .job-card:hover::after {
+      opacity: 1;
+    }
+
+    .job-logo {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: radial-gradient(circle at 0 0, #4f46e5, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    .job-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .job-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .job-title-row h3 {
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .job-company {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .job-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 3px;
+    }
+
+    .job-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(75,85,99,0.9);
+      font-size: 0.7rem;
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.9);
+    }
+
+    .job-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .job-meta-left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .job-meta-salary {
+      color: #a5b4fc;
+      font-weight: 500;
+    }
+
+    .job-meta-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .job-badge {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(22,163,74,0.15);
+      border: 1px solid rgba(22,163,74,0.7);
+      color: #bbf7d0;
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .job-badge span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .job-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .job-actions button {
+      font-size: 0.75rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+    }
+
+    .jobs-detail-card {
+      background: radial-gradient(circle at 0 0, rgba(15,23,42,0.98), rgba(15,23,42,1));
+      border-radius: 18px;
+      padding: 10px 10px 12px;
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 190px;
+    }
+
+    .job-detail-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .job-detail-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .job-detail-title {
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .job-detail-company {
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .job-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.76rem;
+      margin-top: 4px;
+    }
+
+    .job-detail-meta span {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.9);
+    }
+
+    .job-detail-body {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      max-height: 130px;
+      overflow-y: auto;
+      padding-right: 2px;
+      scrollbar-width: thin;
+    }
+
+    .job-detail-body::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .job-detail-body::-webkit-scrollbar-thumb {
+      background: rgba(148,163,184,0.7);
+      border-radius: 999px;
+    }
+
+    .job-detail-footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .job-detail-footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .job-detail-footer .note {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .job-detail-footer .note span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .view-toggle {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.98);
+      box-shadow: var(--shadow-subtle);
+      gap: 2px;
+      font-size: 0.76rem;
+    }
+
+    .view-toggle button {
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: transparent;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .view-toggle button.active {
+      background: radial-gradient(circle at top, #4f46e5, #22c55e);
+      box-shadow: 0 14px 30px rgba(22,163,74,0.7);
+      color: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .view-toggle button span.icon {
+      font-size: 0.8rem;
+    }
+
+    .panel {
+      border-radius: 20px;
+      background: radial-gradient(circle at 0 0, rgba(15,23,42,0.98), rgba(15,23,42,1));
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: var(--shadow-subtle);
+      padding: 12px 12px 12px;
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .panel-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .panel-sub {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .panel-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 360px;
+      overflow-y: auto;
+      padding-right: 3px;
+      scrollbar-width: thin;
+    }
+
+    .panel-body::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .panel-body::-webkit-scrollbar-thumb {
+      background: rgba(148,163,184,0.7);
+      border-radius: 999px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.78rem;
+    }
+
+    .form-row label {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .form-row small {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .form-grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    @media (max-width: 520px) {
+      .form-grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .badge-pill {
+      font-size: 0.7rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+
+    .pill-group button {
+      border-radius: 999px;
+      padding: 5px 10px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.96);
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .pill-group button.active {
+      background: linear-gradient(135deg, #4f46e5, #ec4899);
+      border-color: rgba(129,140,248,0.85);
+      box-shadow: 0 14px 30px rgba(79,70,229,0.9);
+      transform: translateY(-1px);
+    }
+
+    .pill-group button:hover:not(.active) {
+      background: rgba(30,64,175,0.9);
+      border-color: rgba(148,163,184,0.85);
+      box-shadow: 0 10px 23px rgba(30,64,175,0.9);
+      transform: translateY(-1px);
+    }
+
+    .candidate-card {
+      border-radius: 14px;
+      padding: 8px 9px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: radial-gradient(circle at 0 0, rgba(15,23,42,0.98), rgba(15,23,42,0.96));
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), background var(--transition-fast);
+    }
+
+    .candidate-card:hover {
+      border-color: rgba(129,140,248,0.85);
+      box-shadow: 0 16px 32px rgba(15,23,42,0.9);
+      transform: translateY(-1px);
+      background: radial-gradient(circle at 0 0, rgba(15,23,42,1), rgba(15,23,42,0.98));
+    }
+
+    .candidate-avatar {
+      min-width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ec4899, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: 2px solid #020617;
+      color: #f9fafb;
+    }
+
+    .candidate-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .candidate-name-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .candidate-name-row h3 {
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .candidate-role {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .candidate-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .candidate-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 3px;
+    }
+
+    .candidate-skill-tag {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.96);
+      font-size: 0.7rem;
+    }
+
+    .candidate-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .candidate-footer-row button {
+      font-size: 0.74rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+    }
+
+    .candidate-video {
+      font-size: 0.74rem;
+      color: #a855f7;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .schedule-card {
+      border-radius: 18px;
+      background: radial-gradient(circle at 0 0, rgba(15,23,42,0.98), rgba(15,23,42,1));
+      border: 1px solid rgba(148,163,184,0.7);
+      padding: 10px 10px 11px;
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .schedule-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .schedule-main {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .schedule-quick-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+
+    .schedule-quick-pills button {
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.96);
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .schedule-quick-pills button.active {
+      background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+      border-color: rgba(129,140,248,0.85);
+      box-shadow: 0 14px 30px rgba(37,99,235,0.9);
+      transform: translateY(-1px);
+    }
+
+    .schedule-quick-pills button:hover:not(.active) {
+      background: rgba(30,64,175,0.9);
+      border-color: rgba(148,163,184,0.85);
+      box-shadow: 0 10px 23px rgba(30,64,175,0.9);
+      transform: translateY(-1px);
+    }
+
+    .schedule-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    @media (max-width: 520px) {
+      .schedule-fields {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .schedule-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .schedule-footer-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .schedule-footer-left span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
+    }
+
+    .schedule-footer-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .schedule-footer-right span {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.96);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 80;
+      backdrop-filter: blur(18px);
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      max-width: 420px;
+      width: 100%;
+      border-radius: 24px;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.98), rgba(15,23,42,1));
+      border: 1px solid rgba(148,163,184,0.85);
+      box-shadow: 0 30px 80px rgba(15,23,42,0.9);
+      padding: 16px 16px 14px;
+      position: relative;
+      animation: popIn 0.2s ease-out;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .modal-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .modal-close {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.85);
+      background: rgba(15,23,42,0.98);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .modal-close:hover {
+      background: rgba(220,38,38,0.95);
+      box-shadow: 0 14px 34px rgba(220,38,38,0.8);
+      transform: translateY(-1px);
+    }
+
+    .modal-body {
+      margin-top: 6px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 3px;
+      scrollbar-width: thin;
+    }
+
+    .modal-body::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb {
+      background: rgba(148,163,184,0.7);
+      border-radius: 999px;
+    }
+
+    .auth-toggle {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.98);
+      gap: 2px;
+      font-size: 0.76rem;
+    }
+
+    .auth-toggle button {
+      border-radius: 999px;
+      padding: 5px 10px;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .auth-toggle button.active {
+      background: radial-gradient(circle at top, #4f46e5, #22c55e);
+      box-shadow: 0 14px 30px rgba(22,163,74,0.9);
+      color: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .auth-role-toggle {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .auth-role-toggle button {
+      flex: 1;
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.96);
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .auth-role-toggle button.active {
+      background: linear-gradient(135deg, #4f46e5, #ec4899);
+      border-color: rgba(129,140,248,0.85);
+      box-shadow: 0 16px 34px rgba(79,70,229,0.95);
+      transform: translateY(-1px);
+    }
+
+    .auth-role-toggle button span.icon {
+      font-size: 0.8rem;
+    }
+
+    .auth-form {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    .auth-footer {
+      margin-top: 6px;
+      font-size: 0.74rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .link {
+      color: #a5b4fc;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-thickness: 1px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      max-width: 280px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 0 0, rgba(22,163,74,0.96), rgba(15,23,42,0.98));
+      color: #f9fafb;
+      padding: 10px 12px;
+      box-shadow: 0 22px 50px rgba(15,23,42,0.9);
+      display: none;
+      font-size: 0.8rem;
+      z-index: 90;
+    }
+
+    .toast.active {
+      display: block;
+      animation: slideUp 0.22s ease-out;
+    }
+
+    .toast-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toast-title span.icon {
+      font-size: 0.9rem;
+    }
+
+    .toast-body {
+      color: #e5e7eb;
+    }
+
+    .toast-meta {
+      margin-top: 3px;
+      font-size: 0.72rem;
+      color: #d1fae5;
+    }
+
+    .empty-state {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px dashed rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.94);
+    }
+
+    .pill-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <div class="logo">
+        <div class="logo-mark">
+          <div class="logo-inner">HC</div>
+        </div>
+        <div class="logo-text">
+          <span>HireFast Cafe</span>
+          <span>Hire in days, not months</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-pill active" data-view="home">
+          Home
+          <span>Trending jobs</span>
+        </button>
+        <button class="nav-pill" data-view="candidates">
+          Talent
+          <span>Top candidates</span>
+        </button>
+        <button class="nav-pill" data-view="schedule">
+          Schedule
+          <span>Instant interviews</span>
+        </button>
+      </nav>
+
+      <div class="nav-right">
+        <button class="pill-button small ghost" id="openAuthButton">
+          <span class="icon">🔐</span>
+          Sign in / Join
+        </button>
+        <button class="pill-button small primary" id="ctaPrimary">
+          <span class="dot"></span>
+          Post a job
+        </button>
+
+        <div class="user-chip" id="userChip">
+          <div class="user-avatar" id="userAvatar">U</div>
+          <div>
+            <div class="user-name" id="userName">Guest</div>
+            <div class="user-role" id="userRoleLabel">Not signed in</div>
+          </div>
+          <div class="user-status-dot"></div>
+        </div>
+      </div>
+    </header>
+
+    <main id="mainContent" class="main-layout">
+      <section class="left-column">
+        <div class="hero-card">
+          <div class="hero-glow-orb"></div>
+
+          <div class="hero-header">
+            <div class="hero-left-top">
+              <div class="live-hiring">
+                <span class="live-dot"></span>
+                Live roles & candidates
+              </div>
+              <div class="tag">
+                ⚡ Match, message & schedule in minutes
+              </div>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat-pill">
+                <span class="pill-badge-dot"></span>
+                <span><strong>18</strong> instant interviews today</span>
+              </div>
+              <div class="hero-stat-pill">
+                ⏱ <span>Median hiring time <strong>6 days</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <h1 class="hero-title">
+            Hire startup‑ready talent in <span class="highlight">days, not months.</span>
+          </h1>
+          <p class="hero-subtitle">
+            One streamlined workspace where companies post roles, candidates showcase skills, and both sides jump straight into fast, focused interviews – no recruiting noise.
+          </p>
+
+          <div class="hero-actions">
+            <button class="pill-button primary" id="heroRecruiter">
+              <span>✨ I’m hiring</span>
+              <span class="icon">🏢</span>
+            </button>
+            <button class="pill-button ghost" id="heroCandidate">
+              <span>🚀 I’m a candidate</span>
+              <span class="icon">💼</span>
+            </button>
+            <div class="hero-secondary">
+              <div class="avatars">
+                <div class="avatar-bubble"></div>
+                <div class="avatar-bubble"></div>
+                <div class="avatar-bubble"></div>
+              </div>
+              <span>Found roles or offers in the last 24 hours.</span>
+            </div>
+          </div>
+
+          <div class="hero-bottom-strip">
+            <div class="hero-badges">
+              <span>Remote‑first tech & product roles</span>
+              <span>Verified companies & candidates</span>
+              <span>Direct messaging & instant scheduling</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;">
+              <span style="width:7px;height:7px;border-radius:999px;background:#22c55e;"></span>
+              <span>Fast‑lane shortlists for urgent roles</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-top-row">
+            <div class="search-input-wrap">
+              <span class="icon">🔍</span>
+              <input type="text" id="searchInput" placeholder="Search jobs by title, company, or keyword…" />
+            </div>
+            <button class="pill-button small primary" id="searchPrimaryBtn">
+              <span class="icon">⚡</span>
+              Find roles now
+            </button>
+          </div>
+
+          <div class="search-filters-row">
+            <div class="filter-chip active" data-filter-group="location" data-filter-value="any">
+              <span class="dot"></span> Any location
+            </div>
+            <div class="filter-chip" data-filter-group="location" data-filter-value="remote">
+              🌍 Remote
+            </div>
+            <div class="filter-chip" data-filter-group="location" data-filter-value="hybrid">
+              🏙 Hybrid
+            </div>
+            <div class="filter-chip" data-filter-group="location" data-filter-value="onsite">
+              🏢 Onsite
+            </div>
+
+            <div class="filter-chip active" data-filter-group="type" data-filter-value="any">
+              All types
+            </div>
+            <div class="filter-chip" data-filter-group="type" data-filter-value="full-time">
+              Full‑time
+            </div>
+            <div class="filter-chip" data-filter-group="type" data-filter-value="contract">
+              Contract
+            </div>
+            <div class="filter-chip" data-filter-group="type" data-filter-value="internship">
+              Internship
+            </div>
+
+            <div class="filter-chip" data-filter-group="salary" data-filter-value="80k+">
+              💰 80k+
+            </div>
+            <div class="filter-chip" data-filter-group="salary" data-filter-value="120k+">
+              💰 120k+
+            </div>
+          </div>
+
+          <div class="search-meta">
+            <span>
+              Showing <strong id="jobsCountLabel">0</strong> roles that match your filters.
+            </span>
+            <span class="highlight">
+              Tip: Sign in to unlock 1‑click apply & instant scheduling.
+            </span>
+          </div>
+        </div>
+
+        <section class="jobs-section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Live roles</div>
+              <div class="section-sub">Hand‑picked tech & product roles designed for fast hiring.</div>
+            </div>
+            <div class="section-header-right">
+              <span>Sort:</span>
+              <button class="pill-button small ghost" id="sortNewestBtn">
+                ⏱ Newest first
+              </button>
+              <button class="pill-button small ghost" id="sortSalaryBtn">
+                💰 Highest salary
+              </button>
+            </div>
+          </div>
+
+          <div class="jobs-grid">
+            <div class="jobs-list-card">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.76rem;color:var(--muted);">
+                <span>
+                  <span style="color:#e5e7eb;font-weight:600;" id="jobsListTitleLabel">Featured</span> · Curated by HireFast
+                </span>
+                <span id="jobsSortLabel">Sorted by recency</span>
+              </div>
+
+              <div class="jobs-list-scroll" id="jobsList"></div>
+
+              <div class="empty-state" id="jobsEmptyState" style="display:none;">
+                No roles match your search yet. Try clearing a filter or tweaking the title/keywords.
+              </div>
+            </div>
+
+            <div class="jobs-detail-card" id="jobDetailCard">
+              <div class="job-detail-top">
+                <div class="job-detail-main">
+                  <div class="job-detail-title" id="detailTitle">Select a role to see details.</div>
+                  <div class="job-detail-company" id="detailCompany">
+                    <span>Company · Location · Type will appear here.</span>
+                  </div>
+                  <div class="job-detail-meta" id="detailMeta"></div>
+                </div>
+                <div class="job-actions">
+                  <button class="pill-button small primary" id="detailApplyBtn">
+                    Apply now
+                  </button>
+                  <button class="pill-button small ghost" id="detailScheduleBtn">
+                    ⚡ Instant interview
+                  </button>
+                </div>
+              </div>
+
+              <div class="job-detail-body" id="detailDescription">
+                Browse the live roles on the left and click one to view responsibilities, requirements, salary range, and interview options here.
+              </div>
+
+              <div class="job-detail-footer">
+                <div class="job-detail-footer-actions">
+                  <button class="pill-button small ghost" id="detailSaveBtn">
+                    ★ Save for later
+                  </button>
+                  <button class="pill-button small ghost" id="detailShareBtn">
+                    🔗 Share
+                  </button>
+                </div>
+                <div class="note">
+                  <span class="dot"></span>
+                  <span id="detailFooterNote">Median response time under 24 hours.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="right-column">
+        <div class="view-toggle">
+          <button id="toggleCandidatePanel" class="active">
+            <span class="icon">💼</span> Candidates
+          </button>
+          <button id="toggleRecruiterPanel">
+            <span class="icon">🏢</span> Recruiters
+          </button>
+        </div>
+
+        <div class="panel active" id="candidatePanel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Candidate spotlight</div>
+              <p class="panel-sub">Showcase your skills, attach your work, and let companies request interviews instantly.</p>
+            </div>
+            <button class="pill-button small primary" id="createCandidateProfileBtn">
+              🚀 Create profile
+            </button>
+          </div>
+
+          <div class="panel-body">
+            <div id="candidateList"></div>
+            <div class="empty-state" id="candidateEmptyState">
+              No profiles yet. Create your candidate spotlight to appear here and be discoverable by hiring teams.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" id="recruiterPanel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Company workspace</div>
+              <p class="panel-sub">Post roles, view applicants, and run an ultra‑fast hiring pipeline from one dashboard.</p>
+            </div>
+            <button class="pill-button small primary" id="newJobButton">
+              ✏️ Post a role
+            </button>
+          </div>
+
+          <div class="panel-body">
+            <div id="recruiterJobsList"></div>
+            <div class="empty-state" id="recruiterEmptyState">
+              You don’t have any roles live yet. Post your first opening and start receiving candidates within hours.
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-card">
+          <div class="schedule-top">
+            <div>
+              <div class="panel-title">Instant interview lane</div>
+              <p class="panel-sub">Skip slow email threads. Pick a slot, share a link, and get both sides talking in minutes.</p>
+            </div>
+            <button class="pill-button small ghost" id="viewScheduleModal">
+              📅 View schedule
+            </button>
+          </div>
+
+          <div class="schedule-main">
+            <div class="schedule-quick-pills" id="quickSlots">
+              <button data-slot="today-15" class="active">Today · 3:00 PM</button>
+              <button data-slot="today-17">Today · 5:00 PM</button>
+              <button data-slot="tomorrow-10">Tomorrow · 10:00 AM</button>
+              <button data-slot="tomorrow-15">Tomorrow · 3:00 PM</button>
+            </div>
+
+            <div class="schedule-fields">
+              <div class="form-row">
+                <label for="scheduleRole">Role / candidate</label>
+                <input id="scheduleRole" type="text" placeholder="e.g. Frontend Engineer with React" />
+              </div>
+              <div class="form-row">
+                <label for="schedulePlatform">Platform</label>
+                <select id="schedulePlatform">
+                  <option value="Zoom">Zoom</option>
+                  <option value="Google Meet">Google Meet</option>
+                  <option value="Teams">Microsoft Teams</option>
+                  <option value="Phone">Phone call</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="scheduleNotes">Notes (optional)</label>
+              <textarea id="scheduleNotes" placeholder="Add agenda, expectations, or a short intro. This appears in the invite."></textarea>
+            </div>
+
+            <button class="pill-button primary" id="scheduleNowBtn">
+              ⚡ Generate invite link
+            </button>
+
+            <div class="schedule-footer">
+              <div class="schedule-footer-left">
+                <span class="dot"></span>
+                <span>Calendar‑ready links in under 3 seconds.</span>
+              </div>
+              <div class="schedule-footer-right">
+                <span id="scheduleLastLink">No invite generated yet.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Account access</div>
+          <p class="modal-sub" id="authModalSubtitle">
+            Create a profile or sign in as a candidate or recruiter to unlock 1‑click apply, messaging, and instant scheduling.
+          </p>
+        </div>
+        <button class="modal-close" data-close-modal="authModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="auth-toggle">
+          <button id="authLoginTab" class="active">Log in</button>
+          <button id="authSignupTab">Sign up</button>
+        </div>
+
+        <div class="auth-role-toggle">
+          <button id="roleCandidateBtn" class="active">
+            <span class="icon">💼</span>
+            Candidate
+          </button>
+          <button id="roleRecruiterBtn">
+            <span class="icon">🏢</span>
+            Recruiter
+          </button>
+        </div>
+
+        <form class="auth-form" id="authForm">
+          <div class="form-row">
+            <label for="authName">Full name</label>
+            <input type="text" id="authName" placeholder="Jane Doe" />
+          </div>
+          <div class="form-row">
+            <label for="authEmail">Email</label>
+            <input type="email" id="authEmail" placeholder="you@company.com" required />
+          </div>
+          <div class="form-row">
+            <label for="authPassword">Password</label>
+            <input type="password" id="authPassword" placeholder="••••••••" required />
+          </div>
+          <div class="form-row" id="authCompanyRow" style="display:none;">
+            <label for="authCompany">Company</label>
+            <input type="text" id="authCompany" placeholder="Acme Inc." />
+          </div>
+
+          <button type="submit" class="pill-button primary" id="authSubmitBtn">
+            Continue
+          </button>
+
+          <div class="auth-footer">
+            <span id="authFooterMsg">
+              New here? Switch to sign up to create your profile.
+            </span>
+            <span class="link" id="authSwitchLink">
+              I forgot my password
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="candidateModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Candidate profile</div>
+          <p class="modal-sub">
+            Stand out with a tight profile – skills, experience, and a short video intro or portfolio link.
+          </p>
+        </div>
+        <button class="modal-close" data-close-modal="candidateModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="candidateForm" class="auth-form">
+          <div class="form-row">
+            <label for="candidateName">Name</label>
+            <input id="candidateName" required placeholder="Your full name" />
+          </div>
+          <div class="form-row">
+            <label for="candidateTitle">Headline role</label>
+            <input id="candidateTitle" required placeholder="e.g. Senior Frontend Engineer" />
+          </div>
+          <div class="form-grid-two">
+            <div class="form-row">
+              <label for="candidateLocation">Location</label>
+              <input id="candidateLocation" placeholder="City / Remote" />
+            </div>
+            <div class="form-row">
+              <label for="candidateExperience">Experience</label>
+              <select id="candidateExperience">
+                <option value="0-2">0–2 years</option>
+                <option value="2-5">2–5 years</option>
+                <option value="5-8">5–8 years</option>
+                <option value="8+">8+ years</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="candidateSkills">Key skills</label>
+            <input id="candidateSkills" placeholder="Comma‑separated: React, Node, TypeScript" />
+            <small>We’ll automatically turn these into tags.</small>
+          </div>
+          <div class="form-row">
+            <label for="candidateVideo">Video / portfolio link (optional)</label>
+            <input id="candidateVideo" placeholder="Paste a Loom, YouTube, or portfolio URL" />
+          </div>
+          <div class="form-row">
+            <label for="candidateBio">Short bio</label>
+            <textarea id="candidateBio" placeholder="Share a 2–3 sentence overview of your experience and what you’re looking for."></textarea>
+          </div>
+
+          <button type="submit" class="pill-button primary">
+            Save profile
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="jobModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">New role</div>
+          <p class="modal-sub">
+            Create a crisp job card with responsibilities, requirements, and a clear salary range – candidates see it instantly.
+          </p>
+        </div>
+        <button class="modal-close" data-close-modal="jobModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="jobForm" class="auth-form">
+          <div class="form-row">
+            <label for="jobTitle">Job title</label>
+            <input id="jobTitle" required placeholder="e.g. Product Designer" />
+          </div>
+          <div class="form-row">
+            <label for="jobCompany">Company</label>
+            <input id="jobCompany" required placeholder="Your company name" />
+          </div>
+          <div class="form-grid-two">
+            <div class="form-row">
+              <label for="jobLocation">Location</label>
+              <select id="jobLocation">
+                <option value="remote">Remote</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="onsite">Onsite</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="jobType">Type</label>
+              <select id="jobType">
+                <option value="full-time">Full‑time</option>
+                <option value="contract">Contract</option>
+                <option value="internship">Internship</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-two">
+            <div class="form-row">
+              <label for="jobSalary">Salary range</label>
+              <input id="jobSalary" placeholder="e.g. $90k–$120k" />
+            </div>
+            <div class="form-row">
+              <label for="jobCategory">Category</label>
+              <select id="jobCategory">
+                <option value="engineering">Engineering</option>
+                <option value="design">Design</option>
+                <option value="product">Product</option>
+                <option value="marketing">Marketing</option>
+                <option value="ops">Operations</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="jobRequirements">Requirements</label>
+            <textarea id="jobRequirements" placeholder="3–6 bullet‑style sentences describing what you’re looking for."></textarea>
+          </div>
+          <div class="form-row">
+            <label for="jobNiceToHave">Nice to have (optional)</label>
+            <textarea id="jobNiceToHave" placeholder="Preferred experience, bonus skills, etc."></textarea>
+          </div>
+
+          <button type="submit" class="pill-button primary">
+            Publish role
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="scheduleModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Interview schedule</div>
+          <p class="modal-sub">
+            A lightweight summary of your recently generated interview links and preferred slots.
+          </p>
+        </div>
+        <button class="modal-close" data-close-modal="scheduleModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="scheduleHistory"></div>
+        <div class="empty-state" id="scheduleEmpty">
+          No interviews scheduled yet. Use the Instant interview lane to generate your first invite.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <div class="toast-title">
+      <span class="icon">✅</span>
+      <span id="toastTitle">Saved</span>
+    </div>
+    <div class="toast-body" id="toastBody">
+      Your changes have been saved successfully.
+    </div>
+    <div class="toast-meta" id="toastMeta">
+      Visible only to you · Refresh safe
+    </div>
+  </div>
+
+  <script>
+    const demoJobs = [
+      {
+        id: 1,
+        title: "Senior Frontend Engineer",
+        company: "Nova Launch",
+        location: "remote",
+        locationLabel: "Remote (EU/UK friendly)",
+        type: "full-time",
+        salary: "$110k–$140k",
+        category: "engineering",
+        tags: ["React", "TypeScript", "Next.js"],
+        posted: "3 hours ago",
+        highlight: "Hiring this week",
+        featured: true,
+        description:
+          "Lead the frontend of a fast‑moving B2B SaaS product used by remote teams worldwide. Collaborate closely with design and product to build delightful, performant experiences.\n\nResponsibilities include owning key product surfaces, improving performance, and mentoring mid‑level engineers.\n\nYou’re comfortable with modern React, TypeScript, and shipping to production multiple times per week.",
+        requirements:
+          "5+ years in modern frontend engineering.\nStrong React + TypeScript experience.\nComfortable with design systems and component libraries.\nExcellent collaboration with product & design.",
+        niceToHave:
+          "Experience with Next.js and Tailwind.\nBackground in B2B SaaS.\nExposure to A/B testing and analytics."
+      },
+      {
+        id: 2,
+        title: "Product Designer",
+        company: "Parallel Loop",
+        location: "hybrid",
+        locationLabel: "Hybrid · London",
+        type: "full-time",
+        salary: "£65k–£80k",
+        category: "design",
+        tags: ["Product design", "Figma", "User research"],
+        posted: "Yesterday",
+        highlight: "Portfolio review first",
+        featured: true,
+        description:
+          "We’re looking for a product designer to own key flows in our AI‑powered collaboration tool.\n\nYou’ll move from problem framing to high‑fidelity execution, working closely with founders and engineers.\n\nWe care about taste, systems thinking, and crisp interaction design more than perfect dribbble shots.",
+        requirements:
+          "3+ years designing digital products.\nStrong Figma skills and component thinking.\nExperience running or collaborating on user research.\nClear communication with cross‑functional partners.",
+        niceToHave:
+          "Experience with early‑stage startups.\nInterest in AI tooling.\nAbility to prototype in code is a plus."
+      },
+      {
+        id: 3,
+        title: "Founding Product Manager",
+        company: "Signal Dock",
+        location: "onsite",
+        locationLabel: "Onsite · Berlin",
+        type: "full-time",
+        salary: "€80k–€105k + equity",
+        category: "product",
+        tags: ["B2B SaaS", "Early stage", "Roadmapping"],
+        posted: "2 days ago",
+        highlight: "Founding team",
+        featured: false,
+        description:
+          "Shape the roadmap, discovery, and execution for a data observability platform used by engineering teams.\n\nYou’ll partner directly with the CEO and CTO, owning everything from customer interviews to launch strategy.\n\nIdeal for someone who loves zero‑to‑one and working very closely with customers.",
+        requirements:
+          "4+ years in product management.\nExperience in B2B SaaS or data tooling.\nAbility to drive discovery and delivery end‑to‑end.",
+        niceToHave:
+          "Technical background or strong familiarity with data/infra.\nStartup experience (seed–Series B)."
+      },
+      {
+        id: 4,
+        title: "Growth Marketing Lead",
+        company: "Beaconly",
+        location: "remote",
+        locationLabel: "Remote · Global",
+        type: "contract",
+        salary: "USD $4k–$6k / month",
+        category: "marketing",
+        tags: ["Growth", "Content", "Paid"],
+        posted: "4 days ago",
+        highlight: "3‑month contract",
+        featured: false,
+        description:
+          "Own growth experiments across content, paid, and partnerships for a developer‑focused tool.\n\nYou’ll design and run experiments, measure impact, and double down on what works.",
+        requirements:
+          "3+ years in growth or performance marketing.\nHands‑on experience with paid channels and content.\nComfortable working with small, scrappy teams.",
+        niceToHave:
+          "Developer or technical audience experience.\nPrevious startup experience."
+      }
+    ];
+
+    let jobs = [...demoJobs];
+
+    const savedUser = JSON.parse(localStorage.getItem("hf_user") || "null");
+    const savedCandidates = JSON.parse(localStorage.getItem("hf_candidates") || "[]");
+    const savedJobs = JSON.parse(localStorage.getItem("hf_jobs") || "[]");
+    const savedScheduleHistory = JSON.parse(localStorage.getItem("hf_schedule") || "[]");
+
+    jobs = [...savedJobs, ...demoJobs];
+
+    let currentUser = savedUser;
+    let currentRole = savedUser?.role || "candidate";
+    let selectedJobId = jobs[0]?.id || null;
+    let currentJobSort = "newest";
+
+    const navPills = document.querySelectorAll(".nav-pill");
+    const userChip = document.getElementById("userChip");
+    const userAvatar = document.getElementById("userAvatar");
+    const userName = document.getElementById("userName");
+    const userRoleLabel = document.getElementById("userRoleLabel");
+    const openAuthButton = document.getElementById("openAuthButton");
+    const ctaPrimary = document.getElementById("ctaPrimary");
+    const heroRecruiter = document.getElementById("heroRecruiter");
+    const heroCandidate = document.getElementById("heroCandidate");
+
+    const toggleCandidatePanel = document.getElementById("toggleCandidatePanel");
+    const toggleRecruiterPanel = document.getElementById("toggleRecruiterPanel");
+    const candidatePanel = document.getElementById("candidatePanel");
+    const recruiterPanel = document.getElementById("recruiterPanel");
+
+    const authModal = document.getElementById("authModal");
+    const candidateModal = document.getElementById("candidateModal");
+    const jobModal = document.getElementById("jobModal");
+    const scheduleModal = document.getElementById("scheduleModal");
+    const modalCloseButtons = document.querySelectorAll(".modal-close");
+
+    const authLoginTab = document.getElementById("authLoginTab");
+    const authSignupTab = document.getElementById("authSignupTab");
+    const roleCandidateBtn = document.getElementById("roleCandidateBtn");
+    const roleRecruiterBtn = document.getElementById("roleRecruiterBtn");
+    const authForm = document.getElementById("authForm");
+    const authName = document.getElementById("authName");
+    const authEmail = document.getElementById("authEmail");
+    const authPassword = document.getElementById("authPassword");
+    const authCompanyRow = document.getElementById("authCompanyRow");
+    const authCompany = document.getElementById("authCompany");
+    const authSubmitBtn = document.getElementById("authSubmitBtn");
+    const authFooterMsg = document.getElementById("authFooterMsg");
+    const authSwitchLink = document.getElementById("authSwitchLink");
+
+    const searchInput = document.getElementById("searchInput");
+    const searchPrimaryBtn = document.getElementById("searchPrimaryBtn");
+    const filterChips = document.querySelectorAll(".filter-chip");
+    const jobsCountLabel = document.getElementById("jobsCountLabel");
+    const jobsListTitleLabel = document.getElementById("jobsListTitleLabel");
+    const jobsSortLabel = document.getElementById("jobsSortLabel");
+    const jobsList = document.getElementById("jobsList");
+    const jobsEmptyState = document.getElementById("jobsEmptyState");
+
+    const sortNewestBtn = document.getElementById("sortNewestBtn");
+    const sortSalaryBtn = document.getElementById("sortSalaryBtn");
+
+    const jobDetailCard = document.getElementById("jobDetailCard");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailCompany = document.getElementById("detailCompany");
+    const detailMeta = document.getElementById("detailMeta");
+    const detailDescription = document.getElementById("detailDescription");
+    const detailApplyBtn = document.getElementById("detailApplyBtn");
+    const detailScheduleBtn = document.getElementById("detailScheduleBtn");
+    const detailSaveBtn = document.getElementById("detailSaveBtn");
+    const detailShareBtn = document.getElementById("detailShareBtn");
+    const detailFooterNote = document.getElementById("detailFooterNote");
+
+    const candidateList = document.getElementById("candidateList");
+    const candidateEmptyState = document.getElementById("candidateEmptyState");
+    const createCandidateProfileBtn = document.getElementById("createCandidateProfileBtn");
+    const candidateForm = document.getElementById("candidateForm");
+    const candidateName = document.getElementById("candidateName");
+    const candidateTitle = document.getElementById("candidateTitle");
+    const candidateLocation = document.getElementById("candidateLocation");
+    const candidateExperience = document.getElementById("candidateExperience");
+    const candidateSkills = document.getElementById("candidateSkills");
+    const candidateVideo = document.getElementById("candidateVideo");
+    const candidateBio = document.getElementById("candidateBio");
+
+    const recruiterJobsList = document.getElementById("recruiterJobsList");
+    const recruiterEmptyState = document.getElementById("recruiterEmptyState");
+    const newJobButton = document.getElementById("newJobButton");
+    const jobForm = document.getElementById("jobForm");
+    const jobTitle = document.getElementById("jobTitle");
+    const jobCompany = document.getElementById("jobCompany");
+    const jobLocation = document.getElementById("jobLocation");
+    const jobType = document.getElementById("jobType");
+    const jobSalary = document.getElementById("jobSalary");
+    const jobCategory = document.getElementById("jobCategory");
+    const jobRequirements = document.getElementById("jobRequirements");
+    const jobNiceToHave = document.getElementById("jobNiceToHave");
+
+    const quickSlots = document.getElementById("quickSlots");
+    const scheduleRole = document.getElementById("scheduleRole");
+    const schedulePlatform = document.getElementById("schedulePlatform");
+    const scheduleNotes = document.getElementById("scheduleNotes");
+    const scheduleNowBtn = document.getElementById("scheduleNowBtn");
+    const scheduleLastLink = document.getElementById("scheduleLastLink");
+    const viewScheduleModal = document.getElementById("viewScheduleModal");
+    const scheduleHistory = document.getElementById("scheduleHistory");
+    const scheduleEmpty = document.getElementById("scheduleEmpty");
+
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastBody = document.getElementById("toastBody");
+    const toastMeta = document.getElementById("toastMeta");
+
+    let currentAuthMode = "login";
+    let currentAuthRole = currentRole || "candidate";
+    let currentFilters = {
+      location: "any",
+      type: "any",
+      salary: null
+    };
+    let scheduleHistoryData = savedScheduleHistory || [];
+    let candidates = savedCandidates || [];
+
+    function showToast(title, body, meta) {
+      toastTitle.textContent = title;
+      toastBody.textContent = body;
+      toastMeta.textContent = meta || "Visible only to you · Refresh safe";
+      toast.classList.add("active");
+      setTimeout(() => {
+        toast.classList.remove("active");
+      }, 2800);
+    }
+
+    function openModal(modal) {
+      modal.classList.add("active");
+    }
+
+    function closeModal(modal) {
+      modal.classList.remove("active");
+    }
+
+    modalCloseButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-close-modal");
+        if (id) {
+          closeModal(document.getElementById(id));
+        }
+      });
+    });
+
+    window.addEventListener("click", e => {
+      if (e.target.classList.contains("modal-backdrop")) {
+        closeModal(e.target);
+      }
+    });
+
+    function updateUserChip() {
+      if (currentUser) {
+        userChip.style.display = "flex";
+        openAuthButton.style.display = "none";
+        userName.textContent = currentUser.name || currentUser.email;
+        userRoleLabel.textContent = currentUser.role === "recruiter" ? "Recruiter · Company" : "Candidate";
+        userAvatar.textContent = (currentUser.name || currentUser.email || "U").charAt(0).toUpperCase();
+      } else {
+        userChip.style.display = "none";
+        openAuthButton.style.display = "inline-flex";
+        userRoleLabel.textContent = "Not signed in";
+      }
+    }
+
+    updateUserChip();
+
+    openAuthButton.addEventListener("click", () => openModal(authModal));
+    userChip.addEventListener("click", () => openModal(authModal));
+
+    ctaPrimary.addEventListener("click", () => {
+      currentAuthRole = "recruiter";
+      openModal(authModal);
+    });
+
+    heroRecruiter.addEventListener("click", () => {
+      currentAuthRole = "recruiter";
+      openModal(authModal);
+    });
+    heroCandidate.addEventListener("click", () => {
+      currentAuthRole = "candidate";
+      openModal(authModal);
+    });
+
+    function setAuthMode(mode) {
+      currentAuthMode = mode;
+      if (mode === "login") {
+        authLoginTab.classList.add("active");
+        authSignupTab.classList.remove("active");
+        authName.parentElement.style.display = "none";
+        authCompanyRow.style.display = currentAuthRole === "recruiter" ? "block" : "none";
+        authSubmitBtn.textContent = "Log in";
+        authFooterMsg.textContent = "New here? Switch to sign up to create your profile.";
+        authSwitchLink.textContent = "I forgot my password";
+      } else {
+        authLoginTab.classList.remove("active");
+        authSignupTab.classList.add("active");
+        authName.parentElement.style.display = "block";
+        authCompanyRow.style.display = currentAuthRole === "recruiter" ? "block" : "none";
+        authSubmitBtn.textContent = "Create account";
+        authFooterMsg.textContent = "Have an account? Switch to log in with your email.";
+        authSwitchLink.textContent = "Use magic link instead";
+      }
+    }
+
+    authLoginTab.addEventListener("click", () => setAuthMode("login"));
+    authSignupTab.addEventListener("click", () => setAuthMode("signup"));
+
+    function setAuthRole(role) {
+      currentAuthRole = role;
+      if (role === "candidate") {
+        roleCandidateBtn.classList.add("active");
+        roleRecruiterBtn.classList.remove("active");
+      } else {
+        roleCandidateBtn.classList.remove("active");
+        roleRecruiterBtn.classList.add("active");
+      }
+      authCompanyRow.style.display = role === "recruiter" && currentAuthMode === "signup" ? "block" : "none";
+    }
+
+    roleCandidateBtn.addEventListener("click", () => setAuthRole("candidate"));
+    roleRecruiterBtn.addEventListener("click", () => setAuthRole("recruiter"));
+
+    authForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const email = authEmail.value.trim();
+      const password = authPassword.value.trim();
+      const name = authName.value.trim();
+      const company = authCompany.value.trim();
+
+      if (!email || !password || (currentAuthMode === "signup" && !name)) {
+        showToast("Check details", "Please fill in all required fields.", "Missing required fields");
+        return;
+      }
+
+      const user = {
+        email,
+        name: name || email,
+        role: currentAuthRole,
+        company: currentAuthRole === "recruiter" ? company || "Your company" : null
+      };
+      currentUser = user;
+      currentRole = user.role;
+      localStorage.setItem("hf_user", JSON.stringify(user));
+
+      updateUserChip();
+      closeModal(authModal);
+      showToast(
+        currentAuthMode === "login" ? "Welcome back" : "Account ready",
+        currentAuthRole === "recruiter"
+          ? "You can now post roles, manage applicants, and schedule interviews."
+          : "You can now create your candidate profile, apply faster, and accept interview invites.",
+        currentAuthRole === "recruiter" ? "Recruiter workspace unlocked" : "Candidate workspace unlocked"
+      );
+    });
+
+    function getSalaryNumericRange(salary) {
+      if (!salary) return [0, 0];
+      const numbers = salary.replace(/[^0-9\-]/g, "").split("-").map(n => parseInt(n, 10)).filter(Boolean);
+      if (numbers.length === 0) return [0, 0];
+      if (numbers.length === 1) return [numbers[0], numbers[0]];
+      return [numbers[0], numbers[1]];
+    }
+
+    function applyFiltersToJobs() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      const filtered = jobs.filter(job => {
+        if (currentFilters.location && currentFilters.location !== "any") {
+          if (job.location !== currentFilters.location) return false;
+        }
+        if (currentFilters.type && currentFilters.type !== "any") {
+          if (job.type !== currentFilters.type) return false;
+        }
+        if (currentFilters.salary) {
+          const [min] = getSalaryNumericRange(job.salary || "");
+          if (currentFilters.salary === "80k+" && min < 80000) return false;
+          if (currentFilters.salary === "120k+" && min < 120000) return false;
+        }
+        if (searchTerm) {
+          const haystack =
+            (job.title || "").toLowerCase() +
+            " " +
+            (job.company || "").toLowerCase() +
+            " " +
+            (job.description || "").toLowerCase() +
+            " " +
+            (job.tags || []).join(" ").toLowerCase();
+          if (!haystack.includes(searchTerm)) return false;
+        }
+        return true;
+      });
+
+      if (currentJobSort === "salary") {
+        filtered.sort((a, b) => {
+          const [aMin] = getSalaryNumericRange(a.salary || "");
+          const [bMin] = getSalaryNumericRange(b.salary || "");
+          return bMin - aMin;
+        });
+        jobsSortLabel.textContent = "Sorted by salary";
+      } else {
+        filtered.sort((a, b) => (b.featured === true) - (a.featured === true));
+        jobsSortLabel.textContent = "Sorted by recency";
+      }
+
+      jobsCountLabel.textContent = filtered.length;
+      jobsEmptyState.style.display = filtered.length === 0 ? "block" : "none";
+      jobsList.innerHTML = "";
+
+      filtered.forEach(job => {
+        const card = document.createElement("div");
+        card.className = "job-card";
+        card.dataset.jobId = job.id;
+
+        if (job.id === selectedJobId) {
+          card.classList.add("selected");
+        }
+
+        card.innerHTML = `
+          <div class="job-logo">${(job.company || "?").charAt(0).toUpperCase()}</div>
+          <div class="job-main">
+            <div class="job-title-row">
+              <h3>${job.title}</h3>
+              <span class="badge">${job.posted || "Recently added"}</span>
+            </div>
+            <div class="job-company">
+              <span>${job.company}</span>
+              <span>·</span>
+              <span>${job.locationLabel || job.location}</span>
+            </div>
+            <div class="job-tags">
+              ${(job.tags || [])
+                .map(tag => `<span class="job-tag">${tag}</span>`)
+                .join("")}
+            </div>
+            <div class="job-meta-row">
+              <div class="job-meta-left">
+                <span>${job.type === "full-time" ? "Full‑time" : job.type === "contract" ? "Contract" : "Internship"}</span>
+                <span class="job-meta-salary">${job.salary || "Competitive"}</span>
+              </div>
+              <div class="job-meta-right">
+                ${
+                  job.highlight
+                    ? `<span class="job-badge"><span class="dot"></span>${job.highlight}</span>`
+                    : ""
+                }
+              </div>
+            </div>
+          </div>
+        `;
+
+        card.addEventListener("click", () => {
+          document.querySelectorAll(".job-card").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+          selectedJobId = job.id;
+          renderJobDetail(job.id);
+        });
+
+        jobsList.appendChild(card);
+      });
+
+      if (filtered.length > 0 && !filtered.find(j => j.id === selectedJobId)) {
+        selectedJobId = filtered[0].id;
+        renderJobDetail(selectedJobId);
+      }
+      if (filtered.length === 0) {
+        jobDetailCard.style.opacity = "0.6";
+      } else {
+        jobDetailCard.style.opacity = "1";
+      }
+    }
+
+    function renderJobDetail(jobId) {
+      const job = jobs.find(j => j.id === jobId);
+      if (!job) return;
+
+      detailTitle.textContent = job.title;
+      detailCompany.innerHTML = `
+        <span>${job.company}</span>
+        <span>·</span>
+        <span>${job.locationLabel || job.location}</span>
+        <span>·</span>
+        <span>${job.type === "full-time" ? "Full‑time" : job.type === "contract" ? "Contract" : "Internship"}</span>
+      `;
+      detailMeta.innerHTML = `
+        <span>${job.category ? job.category.charAt(0).toUpperCase() + job.category.slice(1) : "General"}</span>
+        <span>Salary: ${job.salary || "Competitive"}</span>
+        <span>Posted: ${job.posted || "Recently added"}</span>
+      `;
+      const bodyParts = [];
+      if (job.description) bodyParts.push(job.description);
+      if (job.requirements) bodyParts.push("Requirements:\n" + job.requirements);
+      if (job.niceToHave) bodyParts.push("Nice to have:\n" + job.niceToHave);
+      detailDescription.textContent = bodyParts.join("\n\n");
+      detailFooterNote.textContent = job.highlight || "Median response time under 24 hours.";
+    }
+
+    applyFiltersToJobs();
+    if (selectedJobId) renderJobDetail(selectedJobId);
+
+    filterChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        const group = chip.getAttribute("data-filter-group");
+        const value = chip.getAttribute("data-filter-value");
+
+        filterChips.forEach(c => {
+          const g = c.getAttribute("data-filter-group");
+          if (g === group) c.classList.remove("active");
+        });
+
+        if (group === "salary" && currentFilters.salary === value) {
+          currentFilters.salary = null;
+          chip.classList.remove("active");
+        } else if (group === "salary") {
+          currentFilters.salary = value;
+          chip.classList.add("active");
+        } else {
+          chip.classList.add("active");
+          currentFilters[group] = value;
+        }
+
+        applyFiltersToJobs();
+      });
+    });
+
+    searchInput.addEventListener("input", () => {
+      jobsListTitleLabel.textContent = searchInput.value.trim() ? "Search results" : "Featured";
+      applyFiltersToJobs();
+    });
+
+    searchPrimaryBtn.addEventListener("click", () => {
+      applyFiltersToJobs();
+      showToast("Search updated", "We’ve refreshed roles based on your filters.", "Search filters applied");
+    });
+
+    sortNewestBtn.addEventListener("click", () => {
+      currentJobSort = "newest";
+      applyFiltersToJobs();
+    });
+    sortSalaryBtn.addEventListener("click", () => {
+      currentJobSort = "salary";
+      applyFiltersToJobs();
+    });
+
+    function renderCandidates() {
+      candidateList.innerHTML = "";
+      if (!candidates || candidates.length === 0) {
+        candidateEmptyState.style.display = "block";
+        return;
+      }
+      candidateEmptyState.style.display = "none";
+
+      candidates.forEach(c => {
+        const card = document.createElement("div");
+        card.className = "candidate-card";
+        const skills = (c.skills || "").split(",").map(s => s.trim()).filter(Boolean);
+        card.innerHTML = `
+          <div class="candidate-avatar">${(c.name || "?").charAt(0).toUpperCase()}</div>
+          <div class="candidate-main">
+            <div class="candidate-name-row">
+              <div>
+                <h3>${c.name}</h3>
+                <div class="candidate-role">${c.title}</div>
+              </div>
+              <span class="badge">Open to offers</span>
+            </div>
+            <div class="candidate-meta">
+              <span>${c.location || "Any location"}</span>
+              <span>·</span>
+              <span>${c.experience || "2–5 years"}</span>
+            </div>
+            <div class="candidate-skills">
+              ${
+                skills.length
+                  ? skills.map(s => `<span class="candidate-skill-tag">${s}</span>`).join("")
+                  : `<span class="candidate-skill-tag">Add skills to stand out</span>`
+              }
+            </div>
+            <div class="candidate-footer-row">
+              <button class="pill-button small primary">Request interview</button>
+              ${
+                c.video
+                  ? `<span class="candidate-video" data-url="${c.video}">▶ Watch intro</span>`
+                  : `<span class="candidate-video">Add a short intro video link to boost replies.</span>`
+              }
+            </div>
+          </div>
+        `;
+        const videoEl = card.querySelector(".candidate-video");
+        if (c.video && videoEl) {
+          videoEl.addEventListener("click", () => {
+            window.open(c.video, "_blank");
+          });
+        }
+        candidateList.appendChild(card);
+      });
+    }
+
+    renderCandidates();
+
+    createCandidateProfileBtn.addEventListener("click", () => {
+      if (!currentUser) {
+        currentAuthRole = "candidate";
+        openModal(authModal);
+      } else {
+        openModal(candidateModal);
+      }
+    });
+
+    candidateForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const candidate = {
+        name: candidateName.value.trim(),
+        title: candidateTitle.value.trim(),
+        location: candidateLocation.value.trim(),
+        experience: candidateExperience.value,
+        skills: candidateSkills.value.trim(),
+        video: candidateVideo.value.trim(),
+        bio: candidateBio.value.trim()
+      };
+      if (!candidate.name || !candidate.title) {
+        showToast("Missing details", "Name and headline role are required.", "Add required fields");
+        return;
+      }
+      candidates.unshift(candidate);
+      localStorage.setItem("hf_candidates", JSON.stringify(candidates));
+      renderCandidates();
+      closeModal(candidateModal);
+      showToast("Profile live", "Your candidate profile is now visible in the spotlight section.", "Candidates can be discovered by recruiters");
+    });
+
+    function renderRecruiterJobs() {
+      recruiterJobsList.innerHTML = "";
+      const recruiterJobs = savedJobs;
+      if (!recruiterJobs || recruiterJobs.length === 0) {
+        recruiterEmptyState.style.display = "block";
+        return;
+      }
+      recruiterEmptyState.style.display = "none";
+
+      recruiterJobs.forEach(job => {
+        const row = document.createElement("div");
+        row.className = "candidate-card";
+        row.innerHTML = `
+          <div class="candidate-avatar">${(job.company || "?").charAt(0).toUpperCase()}</div>
+          <div class="candidate-main">
+            <div class="candidate-name-row">
+              <div>
+                <h3>${job.title}</h3>
+                <div class="candidate-role">${job.company}</div>
+              </div>
+              <span class="badge">${job.posted || "Draft"}</span>
+            </div>
+            <div class="candidate-meta">
+              <span>${job.locationLabel || job.location}</span>
+              <span>·</span>
+              <span>${job.type === "full-time" ? "Full‑time" : job.type === "contract" ? "Contract" : "Internship"}</span>
+              <span>·</span>
+              <span>${job.salary || "Competitive"}</span>
+            </div>
+            <div class="candidate-footer-row">
+              <button class="pill-button small ghost">View applicants</button>
+              <button class="pill-button small primary">Share interview link</button>
+            </div>
+          </div>
+        `;
+        recruiterJobsList.appendChild(row);
+      });
+    }
+
+    renderRecruiterJobs();
+
+    newJobButton.addEventListener("click", () => {
+      if (!currentUser || currentUser.role !== "recruiter") {
+        currentAuthRole = "recruiter";
+        openModal(authModal);
+      } else {
+        openModal(jobModal);
+      }
+    });
+
+    jobForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const customJob = {
+        id: Date.now(),
+        title: jobTitle.value.trim(),
+        company: jobCompany.value.trim(),
+        location: jobLocation.value,
+        locationLabel:
+          jobLocation.value === "remote"
+            ? "Remote"
+            : jobLocation.value === "hybrid"
+            ? "Hybrid"
+            : "Onsite",
+        type: jobType.value,
+        salary: jobSalary.value.trim(),
+        category: jobCategory.value,
+        tags: [jobCategory.value.charAt(0).toUpperCase() + jobCategory.value.slice(1)],
+        posted: "Just now",
+        highlight: "Hiring urgently",
+        featured: true,
+        description: jobRequirements.value.trim(),
+        requirements: jobRequirements.value.trim(),
+        niceToHave: jobNiceToHave.value.trim()
+      };
+      if (!customJob.title || !customJob.company) {
+        showToast("Missing details", "Job title and company are required.", "Add required fields");
+        return;
+      }
+      savedJobs.unshift(customJob);
+      localStorage.setItem("hf_jobs", JSON.stringify(savedJobs));
+      jobs = [...savedJobs, ...demoJobs];
+      renderRecruiterJobs();
+      applyFiltersToJobs();
+      closeModal(jobModal);
+      showToast("Role published", "Your role is now visible on the main jobs feed.", "Live to candidates immediately");
+    });
+
+    toggleCandidatePanel.addEventListener("click", () => {
+      toggleCandidatePanel.classList.add("active");
+      toggleRecruiterPanel.classList.remove("active");
+      candidatePanel.classList.add("active");
+      recruiterPanel.classList.remove("active");
+    });
+    toggleRecruiterPanel.addEventListener("click", () => {
+      toggleRecruiterPanel.classList.add("active");
+      toggleCandidatePanel.classList.remove("active");
+      recruiterPanel.classList.add("active");
+      candidatePanel.classList.remove("active");
+    });
+
+    navPills.forEach(pill => {
+      pill.addEventListener("click", () => {
+        navPills.forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        const view = pill.getAttribute("data-view");
+        if (view === "home") {
+          document.body.scrollTo
+            ? document.body.scrollTo({ top: 0, behavior: "smooth" })
+            : window.scrollTo({ top: 0, behavior: "smooth" });
+        } else if (view === "candidates") {
+          candidatePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else if (view === "schedule") {
+          scheduleNowBtn.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
+    });
+
+    function setQuickSlotActive(slotButton) {
+      quickSlots.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
+      slotButton.classList.add("active");
+    }
+
+    quickSlots.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => setQuickSlotActive(btn));
+    });
+
+    function generateScheduleLink() {
+      const activeSlotBtn = quickSlots.querySelector("button.active");
+      const slotLabel = activeSlotBtn ? activeSlotBtn.textContent.trim() : "Soon";
+      const role = scheduleRole.value.trim() || "Conversation";
+      const platform = schedulePlatform.value;
+      const notes = scheduleNotes.value.trim();
+      const id = Math.random().toString(36).slice(2, 8);
+      const link = `https://hirefast.cafe/invite/${id}`;
+
+      scheduleLastLink.textContent = `${platform} · ${slotLabel} · ${link}`;
+      scheduleHistoryData.unshift({
+        slotLabel,
+        role,
+        platform,
+        notes,
+        link,
+        createdAt: new Date().toLocaleString()
+      });
+      localStorage.setItem("hf_schedule", JSON.stringify(scheduleHistoryData));
+      renderScheduleHistory();
+
+      showToast(
+        "Invite generated",
+        `Share this ${platform} link and calendar details with your candidate or hiring manager.`,
+        link
+      );
+    }
+
+    scheduleNowBtn.addEventListener("click", generateScheduleLink);
+
+    function renderScheduleHistory() {
+      scheduleHistory.innerHTML = "";
+      if (!scheduleHistoryData || scheduleHistoryData.length === 0) {
+        scheduleEmpty.style.display = "block";
+        return;
+      }
+      scheduleEmpty.style.display = "none";
+      scheduleHistoryData.slice(0, 6).forEach(item => {
+        const row = document.createElement("div");
+        row.className = "candidate-card";
+        row.innerHTML = `
+          <div class="candidate-avatar">📅</div>
+          <div class="candidate-main">
+            <div class="candidate-name-row">
+              <div>
+                <h3>${item.role}</h3>
+                <div class="candidate-role">${item.platform} · ${item.slotLabel}</div>
+              </div>
+              <span class="badge">${item.createdAt}</span>
+            </div>
+            <div class="candidate-meta">
+              <span>Invite link:</span>
+              <span class="link">${item.link}</span>
+            </div>
+            ${
+              item.notes
+                ? `<div class="candidate-skills"><span class="candidate-skill-tag">${item.notes}</span></div>`
+                : ""
+            }
+          </div>
+        `;
+        const linkEl = row.querySelector(".link");
+        linkEl.addEventListener("click", () => {
+          navigator.clipboard
+            .writeText(item.link)
+            .then(() => showToast("Copied", "Invite link copied to clipboard.", item.link))
+            .catch(() => {
+              showToast("Invite link", "Unable to copy automatically. Please copy from the card.", item.link);
+            });
+        });
+        scheduleHistory.appendChild(row);
+      });
+    }
+
+    renderScheduleHistory();
+
+    viewScheduleModal.addEventListener("click", () => openModal(scheduleModal));
+
+    detailApplyBtn.addEventListener("click", () => {
+      if (!currentUser) {
+        openModal(authModal);
+      } else {
+        showToast(
+          "Application sent",
+          "We’ve recorded a fast‑track application for this role on your behalf.",
+          "The hiring team will see your profile"
+        );
+      }
+    });
+
+    detailScheduleBtn.addEventListener("click", () => {
+      scheduleRole.value = detailTitle.textContent || "Conversation";
+      scheduleNowBtn.scrollIntoView({ behavior: "smooth", block: "center" });
+      showToast(
+        "Prepare interview",
+        "Pick a time and generate a calendar‑ready invite for this role.",
+        "Use the Instant interview lane below"
+      );
+    });
+
+    detailSaveBtn.addEventListener("click", () => {
+      showToast("Saved", "We’ll remember this role so you can revisit it later.", "Saved to your device");
+    });
+    detailShareBtn.addEventListener("click", () => {
+      showToast("Share link", "Use your browser share menu to send this role.", "Share with your network");
+    });
+  </script>
+</body>
+</html>
